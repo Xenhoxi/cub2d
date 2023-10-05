@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/04 22:45:47 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/05 13:11:57 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@
 // Map
 # define TSMAP 50
 # define PM_SIZE 20
+
+typedef struct s_line
+{
+	int		pixels;
+	double	dx;
+	double	dy;
+	double	end_x;
+	double	end_y;
+	double	s_x;
+	double	s_y;
+}	t_line;
 
 typedef struct s_player
 {
@@ -75,7 +86,7 @@ void		player_update(t_cub *cub);
 int			entity_hitbox(char **map, int x, int y);
 void		init_player(t_cub *cub);
 void		find_spawn(char **map, int *x, int *y);
-void		draw_line(t_cub *cub);
+void		draw_direction(t_cub *cub);
 
 // player_movement
 void		move_forward(t_cub *cub);
