@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:50:45 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/04 22:28:14 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:34:44 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_cub	*setup_cub(void)
 	cub->player = malloc(sizeof(t_player));
 	cub->player->pos_x = 0;
 	cub->player->pos_y = 0;
-	cub->player->angle = 2 * PI / 4;
-	cub->player->dir_x = cos(cub->player->angle);
-	cub->player->dir_y = sin(cub->player->angle);
+	cub->player->angle = 0;
+	cub->player->dir_x = 0;
+	cub->player->dir_y = 0;
 	printf("Angle = %f\n", cub->player->angle);
 	printf("dir_x = %f, dir_y = %f\n", cub->player->dir_x, cub->player->dir_y);
 	return (cub);
@@ -54,7 +54,7 @@ void	ft_load(t_cub *cub)
 {
 	minimap(cub);
 	init_player(cub);
-	draw_line(cub);
+	draw_direction(cub);
 }
 
 void	ft_update(void *param)
@@ -63,6 +63,7 @@ void	ft_update(void *param)
 
 	cub = (t_cub *)param;
 	player_update(cub);
+	// draw_rays(cub);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/04 22:45:47 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:30:17 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,34 @@
 # define PI 3.14159265359
 # define WIN_HEIGHT 920
 # define WIN_WIDTH 1280
+# define SPEED_SIDE 1.5
+# define SPEED 1.8
 # define TRUE 1
 # define FALSE 0
 
 // Map
 # define TSMAP 50
 # define PM_SIZE 20
+
+typedef struct s_line
+{
+	mlx_image_t *img;
+	int		pixels; // utile pour draw
+	int		map_x; // map[x][y]
+	int		map_y; // map[x][y]
+	double	lenght_x; // Taille de la line sur le maillage en X
+	double	lenght_y; // Taille de la line sur le maillage en X
+	double	dx; // Difference entre start_x et end_x
+	double	dy; // Difference entre start_y et end_y
+	double	sx; // scaleX pente de la droite sur une unite de X
+	double	sy; // scaleY pente de la droite sur une unite de Y
+	double	dx_p; // Difference entre start_x et end_x diviser par pixel (draw)
+	double	dy_p; // Difference entre start_y et end_y diviser par pixel (draw)
+	double	s_x; // start_x
+	double	s_y; // start_y
+	double	end_x; // Position de fin du segment en X
+	double	end_y; // Position de fin du segment en Y
+}	t_line;
 
 typedef struct s_player
 {
@@ -65,6 +87,10 @@ typedef struct s_cub
 	int				game_on;
 }	t_cub;
 
+// ray_drawing
+void		draw_rays(t_cub *cub);
+void		draw_rayline(t_cub *cub, t_line *line);
+
 // minimap
 void		minimap(t_cub *cub);
 void		draw_minimap(t_map *map, mlx_t *mlx, mlx_image_t *img);
@@ -75,7 +101,7 @@ void		player_update(t_cub *cub);
 int			entity_hitbox(char **map, int x, int y);
 void		init_player(t_cub *cub);
 void		find_spawn(char **map, int *x, int *y);
-void		draw_line(t_cub *cub);
+void		draw_direction(t_cub *cub);
 
 // player_movement
 void		move_forward(t_cub *cub);
