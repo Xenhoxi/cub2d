@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:09:37 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/04 19:58:20 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/04 23:52:29 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	player_rotation(t_cub *cub)
 			cub->player->angle = 2 * PI - 0.05;
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
-		draw_line(cub);
+		if (!mlx_is_key_down(mlx, MLX_KEY_LEFT))
+			draw_line(cub);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
@@ -33,10 +34,9 @@ void	player_rotation(t_cub *cub)
 			cub->player->angle = 0.05;
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
-		draw_line(cub);
+		if (!mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+			draw_line(cub);
 	}
-	printf("dir_x = %f, dir_y = %f\n", cub->player->dir_x, cub->player->dir_y);
-	printf("angle = %f\n", cub->player->angle);
 }
 
 void	player_update(t_cub *cub)
@@ -71,16 +71,14 @@ int	entity_hitbox(char **map, int x, int y)
 
 void	draw_line(t_cub *cub)
 {
-	int				i;
 	int				pixels;
 	double			dx;
 	double			dy;
 	double			endX = cub->player->pos_x + (cub->player->dir_x * 10);
 	double			endY = cub->player->pos_y + (cub->player->dir_y * 10);
-	double			pX = cub->player->pos_y;
-	double			pY = cub->player->pos_x;
+	double			pX = cub->player->pos_x;
+	double			pY = cub->player->pos_y;
 
-	i = 0;
 	dx = endX - cub->player->pos_x;
 	dy = endY - cub->player->pos_y;
 	pixels = sqrt((dx * dx) + (dy * dy));
@@ -91,7 +89,7 @@ void	draw_line(t_cub *cub)
 	cub->player->ray_img = mlx_new_image(cub->mlx, WIN_WIDTH, WIN_HEIGHT);
 	while (pixels > 0 && pX > 0 && pY > 0)
 	{
-		mlx_put_pixel(cub->player->ray_img, pY, pX, 0x00FFFFFF);
+		mlx_put_pixel(cub->player->ray_img, pX, pY, 0xFF0000FF);
 		pX += dx;
 		pY += dy;
 		pixels--;
@@ -109,8 +107,8 @@ void	init_player(t_cub *cub)
 	player = cub->player;
 	player->pos_x = (x * TSMAP) + TSMAP / 2 - PM_SIZE / 2;
 	player->pos_y = (y * TSMAP) + TSMAP / 2 - PM_SIZE / 2;
-	player->dir_x = -1;
-	player->dir_y = 0;
+	player->dir_x = cos(cub->player->angle);
+	player->dir_y = sin(cub->player->angle);
 	printf("Player initialized\n");
 }
 

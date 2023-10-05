@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:50:45 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/04 19:24:25 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:28:14 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cub	*setup_cub(void)
 	cub->player = malloc(sizeof(t_player));
 	cub->player->pos_x = 0;
 	cub->player->pos_y = 0;
-	cub->player->angle = 2*PI/2;
+	cub->player->angle = 2 * PI / 4;
 	cub->player->dir_x = cos(cub->player->angle);
 	cub->player->dir_y = sin(cub->player->angle);
 	printf("Angle = %f\n", cub->player->angle);
