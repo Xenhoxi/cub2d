@@ -6,7 +6,7 @@
 #    By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/29 23:49:19 by ljerinec          #+#    #+#              #
-#    Updated: 2023/10/05 12:30:56 by ljerinec         ###   ########.fr        #
+#    Updated: 2023/10/05 15:31:00 by ljerinec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SOURCES =	sources/main.c \
 			sources/engine/minimap_utils.c \
 			sources/engine/player.c \
 			sources/engine/player_movement.c \
+			sources/engine/ray_drawing.c \
 
 OBJ_DIR = object/
 OBJECTS = $(SOURCES:.c=.o)

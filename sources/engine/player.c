@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:09:37 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/05 13:25:10 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:19:56 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ int	entity_hitbox(char **map, int x, int y)
 	return (0);
 }
 
-void	draw_line(t_line line)
-{
-	
-}
-
 void	draw_direction(t_cub *cub)
 {
 	t_line	line;
@@ -86,16 +81,18 @@ void	draw_direction(t_cub *cub)
 	line.dx = line.end_x - cub->player->pos_x;
 	line.dy = line.end_y - cub->player->pos_y;
 	line.pixels = sqrt((line.dx * line.dx) + (line.dy * line.dy));
-	line.dx /= line.pixels;
-	line.dy /= line.pixels;
+	line.dx_p = line.dx;
+	line.dy_p = line.dy;
+	line.dx_p /= line.pixels;
+	line.dy_p /= line.pixels;
 	if (cub->player->ray_img)
 		mlx_delete_image(cub->mlx, cub->player->ray_img);
 	cub->player->ray_img = mlx_new_image(cub->mlx, WIN_WIDTH, WIN_HEIGHT);
 	while (line.pixels > 0 && line.s_x > 0 && line.s_y > 0)
 	{
 		mlx_put_pixel(cub->player->ray_img, line.s_x, line.s_y, 0xFF0000FF);
-		line.s_x += line.dx;
-		line.s_y += line.dy;
+		line.s_x += line.dx_p;
+		line.s_y += line.dy_p;
 		line.pixels--;
 	}
 	mlx_image_to_window(cub->mlx, cub->player->ray_img, 0, 0);
@@ -109,8 +106,8 @@ void	init_player(t_cub *cub)
 
 	find_spawn(cub->map->map, &y, &x);
 	player = cub->player;
-	player->pos_x = (x * TSMAP) + TSMAP / 2 - PM_SIZE / 2;
-	player->pos_y = (y * TSMAP) + TSMAP / 2 - PM_SIZE / 2;
+	player->pos_x = (x * TSMAP) + (TSMAP / 2 - PM_SIZE / 2);
+	player->pos_y = (y * TSMAP) + (TSMAP / 2 - PM_SIZE / 2);
 	cub->player->angle = (2 * (PI / 4));
 	cub->player->dir_x = cos(cub->player->angle);
 	cub->player->dir_y = sin(cub->player->angle);

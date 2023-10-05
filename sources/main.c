@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:50:45 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/05 12:55:03 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:14:16 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_update(void *param)
 
 	cub = (t_cub *)param;
 	player_update(cub);
+	// draw_rays(cub);
 	return ;
 }
 

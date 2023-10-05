@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/05 13:11:57 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:30:13 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_line
 	int		pixels;
 	double	dx;
 	double	dy;
+	double	dx_p;
+	double	dy_p;
 	double	end_x;
 	double	end_y;
 	double	s_x;
@@ -75,6 +77,9 @@ typedef struct s_cub
 	t_map			*map;
 	int				game_on;
 }	t_cub;
+
+// ray_drawing
+void		draw_rays(t_cub *cub);
 
 // minimap
 void		minimap(t_cub *cub);
