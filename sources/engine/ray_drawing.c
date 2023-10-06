@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:00:33 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 14:48:20 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:14:03 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_rays(t_cub *cub)
 				line.lenght_x += line.sx * TSMAP;
 			else
 				line.lenght_y += line.sy * TSMAP;
-			printf("lenght_x = %f lenght_y = %f\n", line.lenght_x, line.lenght_y);
+			printf("sx = %f sy = %f\n", line.sx, line.sy);
 			if (line.lenght_x < line.lenght_y)
 			{
 				if (cub->player->angle >= PI / 2 && cub->player->angle <= (3 * PI) / 2)
