@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 01:57:30 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:35:34 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_line
 	int		pixels; // utile pour draw
 	int		map_x; // map[x][y]
 	int		map_y; // map[x][y]
+	double	dir_x;
+	double	dir_y;
+	double	angle;
 	double	lenght_x; // Taille de la line sur le maillage en X
 	double	lenght_y; // Taille de la line sur le maillage en X
 	double	dx; // Difference entre start_x et end_x
@@ -95,7 +98,7 @@ mlx_image_t	**setup_array_line(void);
 
 // minimap
 void		minimap(t_cub *cub);
-void		draw_minimap(t_map *map, mlx_t *mlx, mlx_image_t *img);
+void		draw_minimap(t_map *map, mlx_t *mlx, mlx_image_t *img_1, mlx_image_t *img_0);
 mlx_image_t	*create_img_full(int size, mlx_t *mlx, uint64_t color);
 
 // player

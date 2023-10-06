@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:09:37 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 14:49:30 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/07 01:04:32 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	init_player(t_cub *cub)
 	player = cub->player;
 	player->pos_x = (x * TSMAP);//+ (TSMAP / 2 - PM_SIZE / 2);
 	player->pos_y = (y * TSMAP);// + (TSMAP / 2 - PM_SIZE / 2);
-	cub->player->angle = (2 * (PI / 4));
+	cub->player->angle = ((PI / 4));
 	cub->player->dir_x = cos(cub->player->angle);
 	cub->player->dir_y = sin(cub->player->angle);
 	cub->player->array_line = setup_array_line();
