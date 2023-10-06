@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:00:33 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 02:06:02 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:48:20 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	scale_for_ray(t_cub *cub, double new_angle, t_line *line)
 	line->dx = line->end_x - cub->player->pos_x;
 	line->dy = line->end_y - cub->player->pos_y;
 	line->pixels = sqrt((line->dx * line->dx) + (line->dy * line->dy));
+	line->dx_p = line->dx;
+	line->dy_p = line->dy;
 	line->dx_p /= line->pixels;
 	line->dy_p /= line->pixels;
 	line->sx = sqrt(1 + pow(line->dy / line->dx, 2));
@@ -46,11 +48,10 @@ void	calcul_offset(t_cub *cub, t_line *line)
 
 	offset_x = ((int)cub->player->pos_x) % TSMAP;
 	offset_y = ((int)cub->player->pos_y) % TSMAP;
-	offset_x = (1 * offset_x) / TSMAP;
-	offset_y = 1 - ((1 * offset_y) / TSMAP);
+	offset_x = offset_x / TSMAP;
+	offset_y = 1 - (offset_y / TSMAP);
 	line->lenght_x = offset_x * line->sx * TSMAP;
 	line->lenght_y = offset_y * line->sy * TSMAP;
-
 	if (cub->player->angle >= PI && cub->player->angle <= PI)
 		line->map_y = (((int)cub->player->pos_y) / TSMAP) - 1;
 	else
@@ -71,12 +72,17 @@ void	draw_rays(t_cub *cub)
 	i = 0;
 	actual = cub->player->angle - (PI / 6);
 	end = cub->player->angle + (PI / 6);
-	while (actual < end)
+	while (actual <= end)
 	{
 		scale_for_ray(cub, actual, &line);
 		calcul_offset(cub, &line);
 		while (1)
 		{
+			if (line.lenght_x < line.lenght_y)
+				line.lenght_x += line.sx * TSMAP;
+			else
+				line.lenght_y += line.sy * TSMAP;
+			printf("lenght_x = %f lenght_y = %f\n", line.lenght_x, line.lenght_y);
 			if (line.lenght_x < line.lenght_y)
 			{
 				if (cub->player->angle >= PI / 2 && cub->player->angle <= (3 * PI) / 2)
@@ -91,10 +97,6 @@ void	draw_rays(t_cub *cub)
 				else
 					line.map_y++;
 			}
-			if (line.lenght_x < line.lenght_y)
-				line.lenght_x += line.sx * TSMAP;
-			else
-				line.lenght_y += line.sy * TSMAP;
 			if (cub->map->map[line.map_y][line.map_x] == '1')
 			{
 				line.end_x = cub->player->pos_x + cos(actual) * line.lenght_x;

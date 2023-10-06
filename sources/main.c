@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:50:45 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 01:34:44 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:27:25 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	ft_load(t_cub *cub)
 {
 	minimap(cub);
 	init_player(cub);
-	draw_direction(cub);
+	draw_rays(cub);
+	// draw_direction(cub);
 }
 
 void	ft_update(void *param)
