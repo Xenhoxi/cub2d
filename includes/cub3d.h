@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 01:30:17 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 01:57:30 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SPEED 1.8
 # define TRUE 1
 # define FALSE 0
+# define NB_RAY 10
 
 // Map
 # define TSMAP 50
@@ -38,7 +39,6 @@
 
 typedef struct s_line
 {
-	mlx_image_t *img;
 	int		pixels; // utile pour draw
 	int		map_x; // map[x][y]
 	int		map_y; // map[x][y]
@@ -60,6 +60,7 @@ typedef struct s_player
 {
 	mlx_image_t	*img_map;
 	mlx_image_t	*ray_img;
+	mlx_image_t	**array_line;
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
@@ -89,7 +90,8 @@ typedef struct s_cub
 
 // ray_drawing
 void		draw_rays(t_cub *cub);
-void		draw_rayline(t_cub *cub, t_line *line);
+void		draw_rayline(t_cub *cub, t_line *line, mlx_image_t **img);
+mlx_image_t	**setup_array_line(void);
 
 // minimap
 void		minimap(t_cub *cub);

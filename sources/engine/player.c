@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:09:37 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 00:04:43 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 02:02:20 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	player_rotation(t_cub *cub)
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
 		if (!mlx_is_key_down(mlx, MLX_KEY_LEFT))
-			draw_direction(cub);
+			draw_rays(cub);
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
@@ -35,7 +35,7 @@ void	player_rotation(t_cub *cub)
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
 		if (!mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-			draw_direction(cub);
+			draw_rays(cub);
 	}
 }
 
@@ -110,6 +110,7 @@ void	init_player(t_cub *cub)
 	cub->player->angle = (2 * (PI / 4));
 	cub->player->dir_x = cos(cub->player->angle);
 	cub->player->dir_y = sin(cub->player->angle);
+	cub->player->array_line = setup_array_line();
 	printf("Player initialized\n");
 }
 

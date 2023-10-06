@@ -6,15 +6,22 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:00:33 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 01:32:28 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/06 02:06:02 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+mlx_image_t	**setup_array_line(void)
+{
+	mlx_image_t	**array;
+
+	array = malloc(sizeof(mlx_image_t *) * ((NB_RAY) + 100));
+	return (array);
+}
+
 void	scale_for_ray(t_cub *cub, double new_angle, t_line *line)
 {
-	line->img = NULL;
 	line->end_x = cub->player->pos_x + (cos(new_angle) * TSMAP);
 	line->end_y = cub->player->pos_y + (sin(new_angle) * TSMAP);
 	line->s_x = cub->player->pos_x;
@@ -59,7 +66,9 @@ void	draw_rays(t_cub *cub)
 	t_line		line;
 	double		actual;
 	double		end;
+	int			i;
 
+	i = 0;
 	actual = cub->player->angle - (PI / 6);
 	end = cub->player->angle + (PI / 6);
 	while (actual < end)
@@ -83,37 +92,38 @@ void	draw_rays(t_cub *cub)
 					line.map_y++;
 			}
 			if (line.lenght_x < line.lenght_y)
-				line.lenght_x += line.sx;
+				line.lenght_x += line.sx * TSMAP;
 			else
-				line.lenght_y += line.sy;
+				line.lenght_y += line.sy * TSMAP;
 			if (cub->map->map[line.map_y][line.map_x] == '1')
 			{
 				line.end_x = cub->player->pos_x + cos(actual) * line.lenght_x;
 				line.end_y = cub->player->pos_y + sin(actual) * line.lenght_y;
-				draw_rayline(cub, &line);
+				draw_rayline(cub, &line, &cub->player->array_line[i]);
 				break ;
 			}
 		}
+		i++;
 		actual += (PI / 12);
 	}
 }
 
-void	draw_rayline(t_cub *cub, t_line *line)
+void	draw_rayline(t_cub *cub, t_line *line, mlx_image_t **img)
 {
 	line->pixels = sqrt((line->dx * line->dx) + (line->dy * line->dy));
 	line->dx_p = line->dx;
 	line->dy_p = line->dy;
 	line->dx_p /= line->pixels;
 	line->dy_p /= line->pixels;
-	if (line->img)
-		mlx_delete_image(cub->mlx, line->img);
-	line->img = mlx_new_image(cub->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (*img)
+		mlx_delete_image(cub->mlx, *img);
+	*img = mlx_new_image(cub->mlx, WIN_WIDTH, WIN_HEIGHT);
 	while (line->pixels > 0 && line->s_x > 0 && line->s_y > 0)
 	{
-		mlx_put_pixel(line->img, line->s_x, line->s_y, 0xFFFF00FF);
+		mlx_put_pixel(*img, line->s_x, line->s_y, 0x00FFFFFF);
 		line->s_x += line->dx_p;
 		line->s_y += line->dy_p;
 		line->pixels--;
 	}
-	mlx_image_to_window(cub->mlx, line->img, 0, 0);
+	mlx_image_to_window(cub->mlx, *img, 0, 0);
 }
