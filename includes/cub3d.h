@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/07 00:35:34 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/08 00:58:10 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_line
 	int		map_y; // map[x][y]
 	double	dir_x;
 	double	dir_y;
+	int		step_x;
+	int		step_y;
 	double	angle;
 	double	lenght_x; // Taille de la line sur le maillage en X
 	double	lenght_y; // Taille de la line sur le maillage en X
