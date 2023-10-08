@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/08 00:58:10 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/08 01:56:58 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,57 @@
 # define TSMAP 50
 # define PM_SIZE 20
 
+/*
+	img;
+	pixels; Nb pixel a draw
+	map_x; map[x][y]
+	map_y; map[x][y]
+	dir_x; Direction en trigo
+	dir_y; Direction en trigo
+	step_x; Taille sur une unite de map
+	step_y; Taille sur une unite de map
+	angle; 
+	lenght_x; Taille de la line sur le maillage en X
+	lenght_y; Taille de la line sur le maillage en X
+	dx; Difference entre start_x et end_x
+	dy; Difference entre start_y et end_y
+	sx; scaleX pente de la droite sur une unite de X
+	sy; scaleY pente de la droite sur une unite de Y
+	dx_p; Dif entre start_x et end_x diviser par pixel (draw)
+	dy_p; Dif entre start_y et end_y diviser par pixel (draw)
+	s_x; start_x
+	s_y; start_y
+	end_x; Position de fin du segment en X
+	end_y; Position de fin du segment en Y
+*/
 typedef struct s_line
 {
-	int		pixels; // utile pour draw
-	int		map_x; // map[x][y]
-	int		map_y; // map[x][y]
-	double	dir_x;
-	double	dir_y;
-	int		step_x;
-	int		step_y;
-	double	angle;
-	double	lenght_x; // Taille de la line sur le maillage en X
-	double	lenght_y; // Taille de la line sur le maillage en X
-	double	dx; // Difference entre start_x et end_x
-	double	dy; // Difference entre start_y et end_y
-	double	sx; // scaleX pente de la droite sur une unite de X
-	double	sy; // scaleY pente de la droite sur une unite de Y
-	double	dx_p; // Difference entre start_x et end_x diviser par pixel (draw)
-	double	dy_p; // Difference entre start_y et end_y diviser par pixel (draw)
-	double	s_x; // start_x
-	double	s_y; // start_y
-	double	end_x; // Position de fin du segment en X
-	double	end_y; // Position de fin du segment en Y
+	mlx_image_t	*img;
+	int			pixels;
+	int			map_x;
+	int			map_y;
+	double		dir_x;
+	double		dir_y;
+	int			step_x;
+	int			step_y;
+	double		angle;
+	double		lenght_x;
+	double		lenght_y;
+	double		dx;
+	double		dy;
+	double		sx;
+	double		sy;
+	double		dx_p;
+	double		dy_p;
+	double		s_x;
+	double		s_y;
+	double		end_x;
+	double		end_y;
 }	t_line;
 
 typedef struct s_player
 {
+	t_line		*line;
 	mlx_image_t	*img_map;
 	mlx_image_t	*ray_img;
 	mlx_image_t	**array_line;
