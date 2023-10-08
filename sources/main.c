@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 23:50:45 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/06 14:27:25 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:27:39 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ t_map	*setup_map(void)
 	return (map);
 }
 
+void	alloc_rays(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	while (++i < NB_RAY)
+		cub->ray_array[i] = malloc(sizeof(t_line));
+	cub->ray_array[i] = NULL;
+}
+
 t_cub	*setup_cub(void)
 {
 	t_cub	*cub;
@@ -29,6 +39,8 @@ t_cub	*setup_cub(void)
 	cub->game_on = 0;
 	cub->map = setup_map();
 	cub->player = malloc(sizeof(t_player));
+	cub->ray_array = malloc(sizeof(t_line *) * (NB_RAY + 1));
+	alloc_rays(cub);
 	cub->player->pos_x = 0;
 	cub->player->pos_y = 0;
 	cub->player->angle = 0;
@@ -55,7 +67,7 @@ void	ft_load(t_cub *cub)
 	minimap(cub);
 	init_player(cub);
 	draw_rays(cub);
-	// draw_direction(cub);
+	draw_direction(cub);
 }
 
 void	ft_update(void *param)

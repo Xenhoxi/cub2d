@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:09:37 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/08 02:00:37 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:34:23 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,38 @@ void	player_rotation(t_cub *cub)
 	mlx = cub->mlx;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
-		cub->player->angle += 0.01;
+		cub->player->angle += 0.05;
 		if (cub->player->angle > 2 * PI)
 			cub->player->angle -= 2 * PI;
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
 		if (!mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		{
+			draw_direction(cub);
 			draw_rays(cub);
+		}
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
-		cub->player->angle -= 0.01;
+		cub->player->angle -= 0.05;
 		if (cub->player->angle < 0)
 			cub->player->angle += 2 * PI;
 		cub->player->dir_x = cos(cub->player->angle);
 		cub->player->dir_y = sin(cub->player->angle);
 		if (!mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		{
+			draw_direction(cub);
 			draw_rays(cub);
+		}
 	}
 }
 
 void	player_update(t_cub *cub)
 {
+	int		i;
 	mlx_t	*mlx;
 
+	i = -1;
 	mlx = cub->mlx;
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		move_left(cub);
@@ -52,6 +60,17 @@ void	player_update(t_cub *cub)
 		move_forward(cub);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		move_backward(cub);
+	if (mlx_is_key_down(mlx, MLX_KEY_K))
+	{
+		cub->player->ray_on = 1;
+		draw_rays(cub);
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_L))
+	{
+		while (cub->ray_array[++i])
+			mlx_delete_image(cub->mlx, cub->ray_array[i]->img);
+		cub->player->ray_on = 0;
+	}
 	player_rotation(cub);
 }
 
@@ -110,7 +129,6 @@ void	init_player(t_cub *cub)
 	cub->player->angle = ((2 * PI / 4));
 	cub->player->dir_x = cos(cub->player->angle);
 	cub->player->dir_y = sin(cub->player->angle);
-	cub->player->array_line = setup_array_line();
 	printf("Player initialized\n");
 }
 
