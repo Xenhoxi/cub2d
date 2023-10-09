@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 23:43:06 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/09 00:25:19 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:16:06 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define SPEED 1.8
 # define TRUE 1
 # define FALSE 0
-# define NB_RAY 60
+# define NB_RAY 50
 
 // Map
 # define TSMAP 50

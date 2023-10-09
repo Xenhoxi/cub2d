@@ -6,7 +6,7 @@
 #    By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/29 23:49:19 by ljerinec          #+#    #+#              #
-#    Updated: 2023/10/06 20:17:00 by ljerinec         ###   ########.fr        #
+#    Updated: 2023/10/09 12:13:09 by ljerinec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ CUB3D = cub3d
 LIBFT_DIR = includes/libft/libft.a
 FT_PRINTF_DIR = includes/ft_printf/ft_printf.a
 INCLUDES_DIR = includes/
-# MLX42_INC = -lglfw -L /Users/ljerinec/.brew/Cellar/glfw/3.3.8/lib/
-MLX42_INC = -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib
+MLX42_INC = -lglfw -L /Users/ljerinec/.brew/Cellar/glfw/3.3.8/lib/
+# MLX42_INC = -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib
 MLX42_DIR = MLX42/build/libmlx42.a
 
 ####################COMPILATION STYLING####################

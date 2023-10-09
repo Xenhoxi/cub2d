@@ -6,7 +6,7 @@
 /*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:00:33 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/10/09 00:27:12 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:38:33 by ljerinec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,32 @@ void	calcul_offset(t_cub *cub, t_line *line)
 	}
 }
 
+void	ray_calculus(t_cub *cub, t_line *line, double *fdist)
+{
+	while (1)
+	{
+		if (cub->map->map[line->map_y][line->map_x] == '1')
+			break ;
+		if (line->lenght_x < line->lenght_y)
+		{
+			*fdist = line->lenght_x;
+			line->lenght_x += line->sx * TSMAP;
+			line->map_x += line->step_x;
+		}
+		else
+		{
+			*fdist = line->lenght_y;
+			line->lenght_y += line->sy * TSMAP;
+			line->map_y += line->step_y;
+		}
+	}
+}
+
 void	draw_rays(t_cub *cub)
 {
 	t_line		*line;
-	double		actual;
 	double		fdist;
+	double		actual;
 	double		end;
 	int			i;
 
@@ -84,23 +105,7 @@ void	draw_rays(t_cub *cub)
 		line = cub->ray_array[i];
 		scale_for_ray(cub, actual, line);
 		calcul_offset(cub, line);
-		while (1)
-		{
-			if (cub->map->map[line->map_y][line->map_x] == '1')
-				break ;
-			if (line->lenght_x < line->lenght_y)
-			{
-				fdist = line->lenght_x;
-				line->lenght_x += line->sx * TSMAP;
-				line->map_x += line->step_x;
-			}
-			else
-			{
-				fdist = line->lenght_y;
-				line->lenght_y += line->sy * TSMAP;
-				line->map_y += line->step_y;
-			}
-		}
+		ray_calculus(cub, line, &fdist);
 		line->end_x = cub->player->pos_x + line->dir_x * fdist;
 		line->end_y = cub->player->pos_y + line->dir_y * fdist;
 		if (cub->player->ray_on)
